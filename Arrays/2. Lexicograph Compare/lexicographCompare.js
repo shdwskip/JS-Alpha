@@ -1,6 +1,5 @@
 function charArrs(arr) {
-
-    var firstArr = arr[0],
+    let firstArr = arr[0],
         secondArr = arr[1],
         char,
         shorter;
@@ -22,11 +21,9 @@ function charArrs(arr) {
         return '<';
     } else if (secondArr.length < firstArr.length) {
         return '>';
-    } else {
-        return '=';
     }
-
+        return '=';
 }
-let arr = ['hello', 'helloz'];
+const arr = ['hello', 'helloz'];
 
 charArrs(arr);

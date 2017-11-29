@@ -5,7 +5,7 @@ function solve(arr) {
         maxIndex = len - 1;
 
     while (minIndex <= maxIndex) {
-        let middleIndex = Math.floor((minIndex + maxIndex) / 2);
+        const middleIndex = Math.floor((minIndex + maxIndex) / 2);
         if (+arr[middleIndex] === numberX) {
             console.log(middleIndex);
             break;

@@ -1,27 +1,27 @@
-let numbers = [4, 6, 8, 12, 4, 6, 6, 12, 4, 4];
+const numbers = [4, 6, 8, 12, 4, 6, 6, 12, 4, 4];
 
-let result = createSubsets(numbers, 12);
+const result = createSubsets(numbers, 12);
 
 console.log('Result', JSON.stringify(result));
 
 function createSubsets(numbers, target) {
     // filter out all items larger than target
-    numbers = numbers.filter(function (value) {
+    numbers = numbers.filter(function(value) {
         return value <= target;
     });
 
     // sort from largest to smallest
-    numbers.sort(function (a, b) {
+    numbers.sort(function(a, b) {
         return b - a;
     });
 
     // array with all the subsets
-    let result = [];
+    const result = [];
 
     while (numbers.length > 0) {
         let i;
         let sum = 0;
-        let addedIndices = [];
+        const addedIndices = [];
 
         // go from the largest to the smallest number and
         // add as many of them as long as the sum isn't above target
@@ -35,7 +35,7 @@ function createSubsets(numbers, target) {
         // remove the items we summed up from the numbers array, and store the items to result
         // since we're going to splice the numbers array several times we start with the largest index
         // and go to the smallest to not affect index position with splice.
-        let subset = [];
+        const subset = [];
         for (i = addedIndices.length - 1; i >= 0; i--) {
             subset.unshift(numbers[addedIndices[i]]);
             numbers.splice(addedIndices[i], 1);

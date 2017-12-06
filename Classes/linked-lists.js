@@ -7,8 +7,9 @@ class ListNode {
 
 class LinkedList {
     constructor() {
-        this._length = 0;
-        this._head = null;
+        this.length = 0;
+        this.head = null;
+        this.tail = null;
         // this._first = null;
         // this._last = null;
     }
@@ -17,34 +18,55 @@ class LinkedList {
         return this._length;
     }
 
+    set length(newLength) {
+        this._length = newLength;
+    }
+
     // get first() {
     //     return this[0][0];
     // }
 
-    append(...value) {
-        let node = new ListNode(value[0]);
-        if (this._head === null) {
-            this._head = node;
-            for (let i = 1; i < value.length; i += 1) {
-                node.next = new ListNode(value[i]);
-                node = node.next;
+    append2(...value) {
+        if (value.length === 1) {
+            const node = new ListNode(value[0]);
+
+            if (this.head === null) {
+                this.head = node;
+                this.tail = node;
+            } else {
+                this.tail.next = node;
+                this.tail = this.tail.next;
             }
         } else {
-            let current = this._head;
-            while (current.next) {
-                current = current.next;
+            value.forEach((val) => this.append2(val));
+        }
+    }
+
+    append(...value) {
+        let node = new ListNode(value[0]);
+        if (this.head === null) {
+            this.head = node;
+            this.tail = node;
+            for (let i = 1; i < value.length; i += 1) {
+                this.tail.next = new ListNode(value[i]);
+                this.tail = this.tail.next;
             }
+        } else {
+            // let current = this.head;
+            // while (current.next) {
+            //     current = current.next;
+            // }
 
             for (let i = 0; i < value.length; i += 1) {
-                current.next = new ListNode(value[i]);
-                current = current.next;
+                this.tail.next = new ListNode(value[i]);
+                this.tail = this.tail.next;
             }
         }
         // for (let i = 0; i < args.length; i += 1) {
         //     this._head[this.length] = args[i];
         //     this._length += 1;
         // }
-        this._length += value.length;
+        this.length += value.length;
         return this;
     }
 

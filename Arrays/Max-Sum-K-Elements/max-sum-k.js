@@ -1,5 +1,5 @@
-let gets = this.gets || require('readline-sync').question;
-let print = this.print || console.log;
+const gets = this.gets || require('readline-sync').question;
+const print = this.print || console.log;
 
 const N = +gets();
 const K = +gets();

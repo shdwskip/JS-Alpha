@@ -43,7 +43,7 @@ class LinkedList {
     }
 
     append(...value) {
-        let node = new ListNode(value[0]);
+        const node = new ListNode(value[0]);
         if (this.head === null) {
             this.head = node;
             this.tail = node;

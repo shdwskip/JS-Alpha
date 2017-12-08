@@ -70,7 +70,13 @@ const getOut = (maze) => {
     };
 
     const wayOut = [];
-    findPath(startRow, startCol, 0, maze, [], wayOut);
+    for (let i = 0; i <= 3; i += 1) {
+        if (matrix[startRow + rowDirs[i]][startCol + colDirs[i]] === ' ') {
+            findPath(startRow, startCol, 0, maze, [], wayOut);
+        } else {
+            continue;
+        }
+    }
     for (const path of wayOut) {
         let line = '';
         for (const dir of path) {

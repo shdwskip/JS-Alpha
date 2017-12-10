@@ -8,17 +8,17 @@ const getGets = (arr) => {
     };
 };
 // this is the local test
-const test = ['36', '18'];
+const test = ['42'];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;
 /* eslint-enable */
 
 const N = +gets();
-const K = +gets();
-let answer = '1';
+let factorial = '1';
 
+// multiply big numbers
 const multiply = (a, b) => {
-    if ((a | 0) === 0 || (b | 0) === 0) {
+    if ((a | 0) === '0' || (b | 0) === '0') {
         return '0';
     }
 
@@ -49,21 +49,11 @@ const multiply = (a, b) => {
 
     return result.reverse().join('');
 };
-for (let i = N; i > K; i -= 1) {
-    answer = multiply(answer, i.toString());
+
+for (let i = 2; i <= N; i += 1) {
+    factorial = multiply(factorial, i.toString());
 }
-print(answer);
 
+print(factorial);
 
-// // deal with integer overflow:
-// const toFix = (number) => {
-//     let str = '';
-//     do {
-//         const a = number % 10;
-//         number = Math.trunc(number/10);
-//         str = a + str;
-//     } while (number > 0);
-//     return str;
-// };
-
-// print(toFix(result));
+// console.log(multiply(multiply('100', '99'), '98'));

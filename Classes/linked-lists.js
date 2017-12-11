@@ -33,13 +33,16 @@ class LinkedList {
             if (this.head === null) {
                 this.head = node;
                 this.tail = node;
+                this.length += 1;
             } else {
                 this.tail.next = node;
                 this.tail = this.tail.next;
+                this.length += 1;
             }
         } else {
             value.forEach((val) => this.append2(val));
         }
+        return this;
     }
 
     append(...value) {
@@ -77,7 +80,7 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-list.append(7).append(4);
+list.append2(7).append2(6, 5, 4);
 
 console.dir(list);
 console.log(list.length);

@@ -20,7 +20,7 @@ const getGets = (arr) => {
     };
 };
 // this is the local test
-const test = ['591 5'];
+const test = ['2 9'];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;
 /* eslint-enable */
@@ -28,15 +28,22 @@ const print = this.print || console.log;
 const nAndM = gets().split(' ').map(Number);
 const N = nAndM[0];
 const M = nAndM[1];
-const S = [];
-const result = [];
-
-for (let i = 0; i <= M; i += 2) {
-    S[i] = N + i;
-    result.push(S[i]);
-    S[i + 1] = S[i] + 1;
-    result.push(S[i + 1]);
-    S[i + 2] = 2 * N + i + 1;
-    result.push(S[i + 2]);
+const S = {
+    1: N,
+};
+let holdNumber = 2;
+let counter = 1;
+while (!S[M]) {
+    for (let j = 2; j < 5; j += 1) {
+        if (j === 2) {
+            S[holdNumber] = S[counter] + 1;
+        } else if (j === 3) {
+            S[holdNumber] = 2 * S[counter] + 1;
+        } else {
+            S[holdNumber] = S[counter] + 2;
+        }
+        holdNumber += 1;
+    }
+    counter += 1;
 }
-print(result[M-1]);
+print(S[M]);

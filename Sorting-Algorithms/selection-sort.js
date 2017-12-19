@@ -31,6 +31,8 @@ const selectionSort = (arr) => {
 };
 
 const arr = generateRandomArray(1, 11);
-console.log(arr);
+// console.log(arr);
 selectionSort(arr);
-console.log(arr);
+// console.log(arr);
+
+module.exports = generateRandomArray;

@@ -9,6 +9,7 @@ const insertionSort = (arr) => {
             j -= 1;
         }
     }
+    return [...arr];
 };
 
 const arr = randomArr(1, 11);

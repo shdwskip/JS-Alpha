@@ -1,3 +1,4 @@
+// O(n*log n)
 const randomArr = require('./selection-sort');
 const merge = (left, right) => {
     let i = 0;

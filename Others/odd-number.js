@@ -30,11 +30,7 @@ const print = this.print || console.log;
 /* globals Map */
 const N = +gets();
 const map = {};
-const numbers = [];
-// for (let i = 0; i < N; i += 1) {
-//     numbers.push(gets());
-// }
-// let count = 1;
+
 for (let i = 0; i < N; i += 1) {
     const current = gets();
     if (!map[current]) {
@@ -50,6 +46,9 @@ for (const key in map) {
         break;
     }
 }
+
+// solution with Map
+// const numbers = [];
 // let nextNumber;
 // while (typeof (nextNumber = gets()) !== 'undefined') {
 //     const count = map.get(nextNumber) || 1;

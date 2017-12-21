@@ -10,7 +10,7 @@ const getGets = (arr) => {
 // this is the local test
 const test = [
     '6',
-    '1 1 1 1 1 1'
+    '1 4 2 6 3 4'
 ];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;
@@ -30,7 +30,7 @@ for (let i = size - 1; i > -1; i -= 1) {
         if (arr[j] > arr[i]) {
             jumps[i] = jumps[j] + 1;
             break;
-        } else if (arr[j] === 0) {
+        } else if (jumps[j] === 0) {
             break;
         }
         j += 1;

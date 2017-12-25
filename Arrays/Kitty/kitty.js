@@ -8,7 +8,9 @@ const getGets = (arr) => {
     };
 };
 // this is the local test
-const test = ['@x@@**xx@*@@', '-8 -11 16 11 -26 -6 -8 -16 10 10 -43 31 -28 -9 -36 9 -2 -41 11'];
+const test = ['@@@xx@*',
+    '1 -1 -1 4'
+];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;
 /* eslint-enable */
@@ -21,8 +23,8 @@ const allSymbols = symbols.length;
 let soulsCollected = 0;
 let foodCollected = 0;
 let deadLocks = 0;
-let totalJumps = 0;
-let catched = false;
+let totalJumps = -1;
+let trapped = false;
 let catPos = 0;
 let currentSymbol;
 
@@ -40,16 +42,15 @@ const checkSymbol = (move) => {
         symbols[move] = '';
     } else if (currentSymbol === 'x') {
         deadLocks += 1;
+        totalJumps += 1;
         if (move % 2 === 0 && soulsCollected > 0) {
             soulsCollected -= 1;
             symbols[move] = '@';
-            // something more
         } else if (move % 2 !== 0 && foodCollected > 0) {
             foodCollected -= 1;
             symbols[move] = '*';
-            // something more
         } else {
-            catched = true;
+            trapped = true;
             print(`You are deadlocked, you greedy kitty!`);
             print(`Jumps before deadlock: ${totalJumps}`);
         }
@@ -58,11 +59,14 @@ const checkSymbol = (move) => {
 checkSymbol(catPos);
 
 for (let i = 0; i <= allMoves; i += 1) {
-    if (catched) {
+    if (trapped) {
         break;
     }
     const step = moves[i];
     if (step < 0) {
+        // catPos = allSymbols - catPos - 1;
+        // catPos = (catPos + step) % allSymbols;
+        // catPos = allSymbols - catPos - 1;
         catPos = (catPos + step) % allSymbols;
         if (catPos < 0) {
             catPos += allSymbols;
@@ -75,7 +79,7 @@ for (let i = 0; i <= allMoves; i += 1) {
     checkSymbol(catPos);
 }
 
-if (!catched) {
+if (!trapped) {
     print(`Coder souls collected: ${soulsCollected}`);
     print(`Food collected: ${foodCollected}`);
     print(`Deadlocks: ${deadLocks}`);

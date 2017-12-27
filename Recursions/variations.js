@@ -6,6 +6,7 @@ const generateVariationsWithoutRep = (n, k, index, variation, used, allVariation
 
     for (let i = 0; i < n; i += 1) {
         if (used[i]) {
+            // with repetition:
             // continue;
         }
 

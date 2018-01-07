@@ -9,132 +9,89 @@ const getGets = (arr) => {
 };
 // this is the local test
 const test = [
-    'ADD -14483',
+    'ADD 5',
     'ADD 1',
-    'ADD 2',
-    'ADD 3',
-    'ADD -14483',
-    'ADD 8637',
     'FIND',
-    'EXIT'
+    'ADD 2',
+    'FIND',
+    'ADD 3',
+    'ADD 1',
+    'FIND',
+    'ADD 3',
+    'FIND',
+    'EXIT',
 ];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;
 /* eslint-enable */
 
-class Heap {
-    constructor(compareFunc) {
-        this.values = [null];
-        this.compareFunc = compareFunc || ((x, y) => x < y);
+const BinaryHeap = require('../Data-Structures/Binary-Heap/binary-heap-mine');
+
+class MedianHeap {
+    constructor() {
+        this._minHeap = new BinaryHeap((x, y) => x < y);
+        this._maxHeap = new BinaryHeap((x, y) => x > y);
     }
 
-    get top() {
-        return this.values[1];
+    isEmpty() {
+        return this._minHeap.isEmpty() && this._maxHeap.isEmpty();
     }
 
-    get count() {
-        return this.values.length - 1;
-    }
-
-    get isEmpty() {
-        return this.count === 0;
-    }
-
-    add(value) {
-        let index = this.values.length;
-        this.values.push(value);
-
-        while (index > 1 && this.compareFunc(value, this.values[index >> 1])) {
-            this.values[index] = this.values[index >> 1];
-            index >>= 1;
-        }
-
-        this.values[index] = value;
-    }
-
-    removeTop() {
-        const value = this.values[this.values.length - 1];
-        this.values.pop();
-
-        if (!this.isEmpty) {
-            this._heapifyDown(1, value);
-        }
-    }
-
-    _heapifyDown(index, value) {
-        while (index * 2 + 1 < this.values.length) {
-            const isFirstChildBetter =
-                this.compareFunc(this.values[index * 2], this.values[index * 2 + 1]);
-            const smallerChildIndex = isFirstChildBetter ? index * 2 : index * 2 + 1;
-            if (this.compareFunc(this.values[smallerChildIndex], value)) {
-                this.values[index] = this.values[smallerChildIndex];
-                index = smallerChildIndex;
+    insert(...elements) {
+        if (elements.length === 1) {
+            if (this.isEmpty()) {
+                this._minHeap.insert(elements[0]);
             } else {
-                break;
+                if (elements[0] <= this.getMedian()) {
+                    this._maxHeap.insert(elements[0]);
+                } else {
+                    this._minHeap.insert(elements[0]);
+                }
+            }
+        } else {
+            elements.forEach((value) => this.insert(value));
+        }
+        this._balance();
+    }
+
+    getMedian() {
+        if (this._minHeap.length === this._maxHeap.length) {
+            return (this._minHeap.top + this._maxHeap.top) / 2;
+        } else if (this._minHeap.length < this._maxHeap.length) {
+            return this._maxHeap.top;
+        }
+        return this._minHeap.top;
+    }
+
+    _balance() {
+        // if min.length + 2 === max.length
+        // or max.length + 2 === min.length => we need to re-balance
+
+        if (Math.abs(this._minHeap.length - this._maxHeap.length) > 1) {
+            if (this._minHeap.length < this._maxHeap.length) {
+                this._minHeap.insert(this._maxHeap.top);
+                this._maxHeap.removeTop();
+            } else {
+                this._maxHeap.insert(this._minHeap.top);
+                this._minHeap.removeTop();
             }
         }
-
-        if (index * 2 < this.values.length) {
-            const smallerChildIndex = index * 2;
-            if (this.compareFunc(this.values[smallerChildIndex], value)) {
-                this.values[index] = this.values[smallerChildIndex];
-                index = smallerChildIndex;
-            }
-        }
-
-        this.values[index] = value;
     }
 }
 
-const getMedian = (minHeap, maxHeap) => {
-    if (minHeap.count === maxHeap.count) {
-        return (minHeap.top + maxHeap.top) / 2;
-    } else if (minHeap.count < maxHeap.count) {
-        return maxHeap.top;
-    }
-    return minHeap.top;
-};
-
-const minHeap = new Heap((x, y) => x < y);
-const maxHeap = new Heap((x, y) => x > y);
 let inputLine;
-// const inputData = [];
 let currentEl;
-// while ((inputLine = gets()) !== 'EXIT') {
-//     if (inputLine.startsWith('A')) {
-//         inputData.push(+inputLine.split(' ')[1]);
-//     } else {
-//         inputData.push('F');
-//     }
-// }
-let counter = 0;
-// minHeap.add(inputData[0]);
+
+const medHeap = new MedianHeap();
+const medians = [];
+
 while ((inputLine = gets()) !== 'EXIT') {
-    if (counter === 0) {
-        minHeap.add(+inputLine.split(' ')[1]);
-        counter += 1;
-        continue;
-    }
-    const currentMedian = getMedian(minHeap, maxHeap);
     if (inputLine.startsWith('A')) {
         currentEl = +inputLine.split(' ')[1];
+        medHeap.insert(currentEl);
     } else {
-        print(currentMedian);
-        continue;
-    }
-
-    // const currentEl = inputData[i];
-    if (currentMedian <= currentEl) {
-        minHeap.add(currentEl);
-    } else {
-        maxHeap.add(currentEl);
-    }
-
-    if (minHeap.count + 2 === maxHeap.count) {
-        minHeap.add(maxHeap.top);
-        maxHeap.removeTop();
-    } else if (maxHeap.count + 2 === minHeap.count) {
-        maxHeap.add(minHeap.top);
-        minHeap.removeTop();
+        medians.push(medHeap.getMedian());
     }
 }
+
+medians.forEach((med) => print(med));

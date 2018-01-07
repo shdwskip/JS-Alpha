@@ -75,3 +75,5 @@ console.log(minHeap.length);
 console.log(minHeap.isEmpty());
 minHeap.removeTop();
 console.log(minHeap);
+
+module.exports = BinaryHeap;

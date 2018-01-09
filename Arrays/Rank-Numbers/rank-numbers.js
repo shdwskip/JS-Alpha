@@ -10,7 +10,10 @@ const getGets = (arr) => {
     };
 };
 // this is the local test
-const test = ['4', '10 1 15 9'];
+const test = [
+    '5',
+    '0 -5 4 -11 1'
+];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;
 /* eslint-enable */
@@ -23,21 +26,21 @@ const copyNumbers = numbers.slice();
 let len = numbers.length;
 let i = 0;
 
-const map = new Map();
+const map = {};
 
-while (len !== 0) {
+while (numbers.length !== 0) {
     const currMax = Math.max(...numbers);
     const indexOfMax = numbers.indexOf(currMax);
-    map.set(currMax, i + 1);
+    map[currMax] = i + 1;
     numbers.splice(indexOfMax, 1);
-    len -= 1;
+    // len -= 1;
     i += 1;
 }
 
 const answer = [];
 for (let j = 0; j < N; j += 1) {
     const currNumber = copyNumbers[j];
-    answer.push(map.get(currNumber));
+    answer.push(map[currNumber]);
 }
 
 print(answer.join(' '));

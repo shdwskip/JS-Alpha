@@ -22,25 +22,25 @@ const print = this.print || console.log;
 
 const N = +gets();
 const numbers = gets().split(' ').map(Number);
-const copyNumbers = numbers.slice();
-let len = numbers.length;
-let i = 0;
+const copyNumbers = numbers.slice().sort((a, b) => b - a);
+// let len = numbers.length;
+// let i = 0;
 
-const map = {};
+// const map = {};
 
-while (numbers.length !== 0) {
-    const currMax = Math.max(...numbers);
-    const indexOfMax = numbers.indexOf(currMax);
-    map[currMax] = i + 1;
-    numbers.splice(indexOfMax, 1);
-    // len -= 1;
-    i += 1;
-}
+// while (numbers.length !== 0) {
+//     const currMax = Math.max(...numbers);
+//     const indexOfMax = numbers.indexOf(currMax);
+//     map[currMax] = i + 1;
+//     numbers.splice(indexOfMax, 1);
+//     // len -= 1;
+//     i += 1;
+// }
 
 const answer = [];
 for (let j = 0; j < N; j += 1) {
-    const currNumber = copyNumbers[j];
-    answer.push(map[currNumber]);
+    // const currNumber = copyNumbers[j];
+    answer.push(copyNumbers.indexOf(numbers[j]) + 1);
 }
 
 print(answer.join(' '));

@@ -11,8 +11,8 @@ const getGets = (arr) => {
 };
 // this is the local test
 const test = [
-    '11',
-    '2 10 1 3 9 8 7 2 4 6 1'
+    '6',
+    '1 2 3 5 7 1'
 ];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;
@@ -33,15 +33,16 @@ while (element < size && element >= 0) {
         break;
     }
 }
-let line = '';
-for (let i = 0; i < result.length; i += 1) {
-    if (result[i][0] === '(') {
-        line += result[i];
-    } else {
-        line += ' ' + result[i];
-    }
-}
-print(line.trim());
+// let line = '';
+// for (let i = 0; i < result.length; i += 1) {
+//     if (result[i][0] === '(') {
+//         line += result[i];
+//     } else {
+//         line += ' ' + result[i];
+//     }
+// }
+// print(line.trim());
+print(result.join(' ').replace(/\s[(]/g, '('));
 
 // if (result.indexOf(index) > -1) {
 //     const indexToReplace = result.indexOf(index);

@@ -27,6 +27,8 @@ const print = this.print || console.log;
 
 /* globals Set */
 
+// https://github.com/Minkov/dmoj-tasks/blob/master/problems/easy/13graphs/03diameter/README.md
+
 class Graph {
     constructor(vertices) {
         this.matrix = [];

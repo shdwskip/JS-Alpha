@@ -34,10 +34,10 @@ let missCat = Number.MAX_SAFE_INTEGER;
 let maxVotes = 0;
 
 for (let i = 0; i < allVotes.length; i += 1) {
-    let currentVotes = allVotes[i];
+    const currentVotes = allVotes[i];
     if (currentVotes > maxVotes) {
         missCat = i;
-        maxVotes = currentVotes
+        maxVotes = currentVotes;
     }
 }
 print(missCat);

@@ -8,7 +8,7 @@ const getGets = (arr) => {
     };
 };
 const test = [
-    ' 778 ',
+    '778',
     'Z123A7787X666Y234'
 ];
 const gets = this.gets || getGets(test);

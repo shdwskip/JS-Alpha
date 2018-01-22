@@ -8,8 +8,8 @@ const getGets = (arr) => {
     };
 };
 const test = [
-    '778',
-    'Z123A7787X666Y234'
+    '1122',
+    'A1B12C11D2'
 ];
 const gets = this.gets || getGets(test);
 const print = this.print || console.log;

@@ -83,10 +83,10 @@ const getResult = (arr, days) => {
         }
     }
     if (queue.length === 0) {
-        // print(days);
+        print(days);
         return days;
     }
     days += 1;
     getResult(tempArr, days);
 };
-print(getResult(sequence, 0));
+getResult(sequence, 0);

@@ -1,0 +1,18 @@
+{
+  "name": "superheroesuniverse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "mysql2": "^1.5.2",
+    "sequelize": "^4.33.4"
+  },
+  "scripts": {
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "add-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js"
+  },
+  "devDependencies": {
+    "sequelize-auto-migrations": "^1.0.2",
+    "validator": "^9.4.1"
+  }
+}
